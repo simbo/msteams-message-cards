@@ -1,5 +1,12 @@
 # MS Teams Message Cards
 
+[![npm Package Version](https://img.shields.io/npm/v/msteams-message-cards?)](https://www.npmjs.com/package/msteams-message-cards)
+[![License MIT](https://img.shields.io/badge/license-MIT-4cc552)](http://simbo.mit-license.org/)
+[![GitHub Repo](https://img.shields.io/badge/repo-public-87ceeb)](https://github.com/simbo/msteams-message-cards)
+![Native Typescript Support](https://img.shields.io/npm/types/msteams-message-cards)
+[![Coveralls Coverage](https://img.shields.io/coveralls/github/simbo/msteams-message-cards)](https://coveralls.io/github/simbo/msteams-message-cards)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/simbo/msteams-message-cards/ci.yml?branch=main)](https://github.com/simbo/msteams-message-cards/actions/workflows/ci.yml)
+
 A javascript library that creates message cards for MS Teams and sends them to a
 webhook (aka "connector").
 
