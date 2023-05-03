@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "color-name-to-code": "^1.0.1",
-    "encode-emojis": "^1.0.0",
+    "encode-emojis": "^1.0.2",
     "joi": "^17.9.2",
     "node-fetch": "^3.3.1"
   },
