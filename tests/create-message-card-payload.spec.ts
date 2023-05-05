@@ -1,6 +1,6 @@
 import { describe, it } from '@jest/globals';
 
-import { createMessageCardPayload, Payload } from '../src/index.js';
+import { createMessageCardPayload, Payload, PayloadPotentialAction, validateMessageCardPayload } from '../src/index.js';
 
 const basePayload: Payload = {
   '@type': 'MessageCard',
@@ -14,6 +14,7 @@ describe('createMessageCardPayload', () => {
       text: 'foo'
     };
     expect(createMessageCardPayload({ text: 'foo' })).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 
   it('should create a payload with only summary', () => {
@@ -22,6 +23,7 @@ describe('createMessageCardPayload', () => {
       summary: 'foo'
     };
     expect(createMessageCardPayload({ summary: 'foo' })).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 
   it('should create a payload with a title', () => {
@@ -31,6 +33,7 @@ describe('createMessageCardPayload', () => {
       title: 'Foo!'
     };
     expect(createMessageCardPayload({ title: 'Foo!', text: 'foo' })).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 
   it('should create a payload with a themeColor', () => {
@@ -40,6 +43,7 @@ describe('createMessageCardPayload', () => {
       themeColor: 'FF0000'
     };
     expect(createMessageCardPayload({ text: 'foo', color: 'red' })).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 
   it('should create a payload with buttons from an object definition', () => {
@@ -62,6 +66,7 @@ describe('createMessageCardPayload', () => {
     expect(
       createMessageCardPayload({ text: 'foo', buttons: [{ label: 'Foo!', url: 'https://foo.com/' }] })
     ).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 
   it('should create a payload with buttons from an array definition', () => {
@@ -82,6 +87,7 @@ describe('createMessageCardPayload', () => {
       ]
     };
     expect(createMessageCardPayload({ text: 'foo', buttons: [['Foo!', 'https://foo.com/']] })).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 
   it('should create a payload with a section containing text', () => {
@@ -91,6 +97,7 @@ describe('createMessageCardPayload', () => {
       sections: [{ text: 'bar' }]
     };
     expect(createMessageCardPayload({ text: 'foo', sections: [{ text: 'bar' }] })).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 
   it('should create a payload with a section containing activity data', () => {
@@ -114,6 +121,7 @@ describe('createMessageCardPayload', () => {
         ]
       })
     ).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 
   it('should create a payload with a section containing buttons', () => {
@@ -132,7 +140,7 @@ describe('createMessageCardPayload', () => {
                   uri: 'https://foo.com/'
                 }
               ]
-            }
+            } as PayloadPotentialAction
           ]
         }
       ]
@@ -143,6 +151,7 @@ describe('createMessageCardPayload', () => {
         sections: [{ buttons: [{ label: 'Foo!', url: 'https://foo.com/' }] }]
       })
     ).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 
   it('should create a payload with a section containing facts from an object definition', () => {
@@ -166,6 +175,7 @@ describe('createMessageCardPayload', () => {
         sections: [{ facts: [{ name: 'foo', value: 'bar' }] }]
       })
     ).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 
   it('should create a payload with a section containing facts from an array definition', () => {
@@ -189,5 +199,23 @@ describe('createMessageCardPayload', () => {
         sections: [{ facts: [['foo', 'bar']] }]
       })
     ).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
+  });
+
+  it('should allow to create payloads with empty collections', () => {
+    const payload = {
+      ...basePayload,
+      text: 'foo',
+      potentialAction: [],
+      sections: []
+    };
+    expect(
+      createMessageCardPayload({
+        text: 'foo',
+        buttons: [],
+        sections: []
+      })
+    ).toStrictEqual(payload);
+    expect(() => validateMessageCardPayload(payload)).not.toThrow();
   });
 });

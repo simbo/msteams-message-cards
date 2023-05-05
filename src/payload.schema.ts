@@ -29,7 +29,7 @@ export const payloadSectionSchema = Joi.object({
   activityText: Joi.string(),
   activityImage: Joi.string().uri({ scheme: 'https' }),
   text: Joi.string(),
-  potentialAction: payloadPotentialActionSchema,
+  potentialAction: Joi.array().items(payloadPotentialActionSchema),
   facts: Joi.array().items(payloadFactSchema)
 }).or('activityTitle', 'activitySubtitle', 'activityImage', 'text', 'potentialAction', 'facts');
 
@@ -44,6 +44,6 @@ export const payloadSchema = Joi.object({
   title: Joi.string(),
   text: Joi.string(),
   themeColor: Joi.string().pattern(/^[\da-f]{6}/i),
-  potentialAction: payloadPotentialActionSchema,
+  potentialAction: Joi.array().items(payloadPotentialActionSchema),
   sections: Joi.array().items(payloadSectionSchema)
 }).or('text', 'summary');
