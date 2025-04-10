@@ -1,6 +1,6 @@
 {
   "name": "msteams-message-cards",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A javascript library to create and message cards and send them to a MS Teams webhook.",
   "author": "Simon Lepel <simbo@simbo.de> (https://simbo.de/)",
   "license": "MIT",
