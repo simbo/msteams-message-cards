@@ -1,5 +1,4 @@
 import { colorNameToCode } from 'color-name-to-code';
-import { encodeEmojis } from 'encode-emojis';
 
 import { OptionsButton, OptionsSection, PayloadOptions } from './options.interface.js';
 import { Payload, PayloadFact, PayloadPotentialAction, PayloadSection } from './payload.interface.js';
@@ -12,13 +11,13 @@ export function createMessageCardPayload(options: PayloadOptions): Payload {
     '@context': 'https://schema.org/extensions'
   };
   if (options.summary) {
-    payload.summary = encodeEmojis(options.summary);
+    payload.summary = options.summary;
   }
   if (options.title) {
-    payload.title = encodeEmojis(options.title);
+    payload.title = options.title;
   }
   if (options.text) {
-    payload.text = encodeEmojis(options.text);
+    payload.text = options.text;
   }
   if (options.color) {
     payload.themeColor = colorNameToCode(options.color, { hash: false });
@@ -35,7 +34,7 @@ export function createMessageCardPayload(options: PayloadOptions): Payload {
 function createPotentialActions(options: OptionsButton[]): PayloadPotentialAction[] {
   return options.reduce((actions, button) => {
     const { label: name, url: uri } = Array.isArray(button) ? { label: button[0], url: button[1] } : button;
-    actions.push({ '@type': 'OpenUri', name: encodeEmojis(name), targets: [{ os: 'default', uri }] });
+    actions.push({ '@type': 'OpenUri', name, targets: [{ os: 'default', uri }] });
     return actions;
   }, [] as PayloadPotentialAction[]);
 }
@@ -45,20 +44,20 @@ function createSections(options: OptionsSection[]): PayloadSection[] {
     const section: PayloadSection = {};
     if (option.activity) {
       if (option.activity.title) {
-        section.activityTitle = encodeEmojis(option.activity.title);
+        section.activityTitle = option.activity.title;
       }
       if (option.activity.subtitle) {
-        section.activitySubtitle = encodeEmojis(option.activity.subtitle);
+        section.activitySubtitle = option.activity.subtitle;
       }
       if (option.activity.text) {
-        section.activityText = encodeEmojis(option.activity.text);
+        section.activityText = option.activity.text;
       }
       if (option.activity.image) {
         section.activityImage = option.activity.image;
       }
     }
     if (option.text) {
-      section.text = encodeEmojis(option.text);
+      section.text = option.text;
     }
     if (option.buttons) {
       section.potentialAction = createPotentialActions(option.buttons);
@@ -66,7 +65,7 @@ function createSections(options: OptionsSection[]): PayloadSection[] {
     if (option.facts) {
       section.facts = option.facts.reduce((facts, data) => {
         const { name, value } = Array.isArray(data) ? { name: data[0], value: data[1] } : data;
-        facts.push({ name: encodeEmojis(name), value: encodeEmojis(value) });
+        facts.push({ name, value });
         return facts;
       }, [] as PayloadFact[]);
     }
