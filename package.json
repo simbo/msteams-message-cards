@@ -21,7 +21,7 @@
     "url": "https://github.com/simbo/msteams-message-cards/issues"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "type": "module",
   "main": "dist/index.js",
@@ -36,7 +36,7 @@
     "lint:fix": "eslint -c .eslintrc.json --fix .",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "preflight": "npm run lint && npm run format && npm run test && npm run build",
+    "check": "npm run lint && npm run format && npm run test && npm run build",
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 jest",
     "test:watch": "npm run test -- --watch",
     "test-run": "ts-node-esm ./test-run/index.ts",
@@ -45,22 +45,22 @@
   "dependencies": {
     "color-name-to-code": "^1.0.1",
     "encode-emojis": "^1.0.2",
-    "joi": "^17.9.2",
-    "node-fetch": "^3.3.1"
+    "joi": "^17.13.3",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
-    "@types/jest": "^29.5.1",
-    "@types/node": "^16.18.25",
-    "@typescript-eslint/eslint-plugin": "^5.59.2",
-    "@typescript-eslint/parser": "^5.59.2",
-    "eslint": "^8.39.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-unicorn": "^46.0.0",
-    "jest": "^29.5.0",
-    "prettier": "^2.8.8",
-    "ts-jest": "^29.1.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.30",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-plugin-unicorn": "^46.0.1",
+    "jest": "^29.7.0",
+    "prettier": "^3.5.3",
+    "ts-jest": "^29.3.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
